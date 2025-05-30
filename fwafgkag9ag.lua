@@ -1,3 +1,66 @@
+
+setfpscap(32555555555555555)
+getgenv().Config = {
+    Box = {
+        Enable = false,
+        Type = 'Full', -- Corner
+        Font = 'ProggyClean',
+        Color = Color3.fromRGB(255, 255, 255),
+        Filled = {
+            Enable = false,
+            Gradient = {
+                Enable = false,
+                Color = {
+                    Start = Color3.fromRGB(255, 255, 255),
+                    End = Color3.fromRGB(0, 255, 0);
+                },
+                Rotation = {
+                    Enable = false,
+                    Auto = false,
+
+                },
+                Transparency = 0.3;
+            }
+        }
+    },
+    Text = {
+        Enable = false,
+        Name = {
+            Enable = false,
+            Teamcheck = false,
+            Color = Color3.fromRGB(255, 255, 255);
+        },
+        Studs = {
+            Enable = false,
+            Color = Color3.fromRGB(255, 255, 255);
+        },
+        Tool = {
+            Enable = false,
+            Color = Color3.fromRGB(255, 255, 255);
+        },
+
+    },
+    Bars = {
+        Enable = true,
+        Health = {
+            ShowOutline = false,
+            Enable = false,
+            Lerp = true;
+            Color1 = Color3.fromRGB(0, 255, 0);
+            Color2 = Color3.fromRGB(255, 255, 0),
+            Color3 = Color3.fromRGB(255, 0, 0)
+        },
+        Armor = {
+            ShowOutline = false,
+            Enable = false,
+            Lerp = true;
+            Color1 = Color3.fromRGB(0, 0, 255);
+            Color2 = Color3.fromRGB(135, 206, 235),
+            Color3 = Color3.fromRGB(1, 0, 0)
+        }
+    }
+}
+
 if not LPH_OBFUSCATED then
 	LPH_JIT_MAX = function(...)
 		return (...)
@@ -346,8 +409,16 @@ utility.funcs.update = LPH_NO_VIRTUALIZE(function(player)
         local x = base_x - (bar_width + 4)
         local outline = playerCache.Bars.Health.Outline
         local fill = playerCache.Bars.Health.Frame
+        local gradient = playerCache.Bars.Health.Gradient
 
-        if outline and fill then
+        if outline and fill and gradient then
+            
+            gradient.Color = ColorSequence.new({
+                ColorSequenceKeypoint.new(0, Config.Bars.Health.Color1),
+                ColorSequenceKeypoint.new(0.5, Config.Bars.Health.Color2),
+                ColorSequenceKeypoint.new(1, Config.Bars.Health.Color3),
+            })
+
             outline.Visible = true
             outline.Position = UDim2.new(0, x - 1, 0, y - 1)
             outline.Size = UDim2.new(0, bar_width + 2, 0, bar_height + 1.1)
