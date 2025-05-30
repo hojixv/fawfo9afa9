@@ -1,5 +1,3 @@
-
-setfpscap(32555555555555555)
 getgenv().Config = {
     Box = {
         Enable = false,
@@ -361,27 +359,31 @@ utility.funcs.update = LPH_NO_VIRTUALIZE(function(player)
             inline.Thickness = 1
             inline.Filled = false
 
-            if Config.Box.Filled.Enable and filled then
-                filled.Position = UDim2.new(0, position.X, 0, position.Y - gui_inset.Y)
-                filled.Size = UDim2.new(0, size.X, 0, size.Y)
-                filled.BackgroundTransparency = Config.Box.Filled.Gradient.Transparency or 0.5
-                filled.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                filled.Visible = Config.Box.Filled.Enable
-                filled.ZIndex = -9e9
+if Config.Box.Filled.Enable and filled then
+    filled.Position = UDim2.new(0, position.X, 0, position.Y - gui_inset.Y)
+    filled.Size = UDim2.new(0, size.X, 0, size.Y)
+    filled.BackgroundTransparency = Config.Box.Filled.Gradient.Transparency or 0.5
+    filled.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    filled.Visible = true
+    filled.ZIndex = -9e9
 
-                if Config.Box.Filled.Gradient.Enable then
-                    local gradient = filled:FindFirstChild("Gradient") or Instance.new("UIGradient")
-                    gradient.Name = "Gradient"
-                    gradient.Color = ColorSequence.new({
-                        ColorSequenceKeypoint.new(0, Config.Box.Filled.Gradient.Color.Start),
-                        ColorSequenceKeypoint.new(1, Config.Box.Filled.Gradient.Color.End)
-                    })
-                    gradient.Rotation = math.sin(tick() * 2) * 180
-                    if not gradient.Parent then gradient.Parent = filled end
-                end
-            elseif filled then
-                filled.Visible = false
-            end
+    local gradient = filled:FindFirstChild("Gradient")
+    if not gradient then
+        gradient = Instance.new("UIGradient")
+        gradient.Name = "Gradient"
+        gradient.Parent = filled
+    end
+
+    gradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Config.Box.Filled.Gradient.Color.Start),
+        ColorSequenceKeypoint.new(1, Config.Box.Filled.Gradient.Color.End)
+    })
+    gradient.Rotation = math.sin(tick() * 2) * 180
+
+elseif filled then
+    filled.Visible = false
+end
+
         else
             local fullBox = playerCache.Box.Full
             if fullBox then
@@ -512,4 +514,3 @@ connections.main.RenderStepped = game:GetService("RunService").Heartbeat:Connect
         end
     end
 end) 
-
