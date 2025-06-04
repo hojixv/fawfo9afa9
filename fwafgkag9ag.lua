@@ -1,4 +1,4 @@
-print 'reality surf'
+print 'fuckk'
 getgenv().Config = {
     Box = {
         Enable = false,
@@ -442,6 +442,7 @@ if Config.Text.Tool.Enable then
     toolLabel.Position = UDim2.new(0, baseX - (toolLabel.AbsoluteSize.X / 2), 0, baseY + size.Y + 15)
     local tool = character:FindFirstChildOfClass("Tool")
     toolLabel.Text = tool and tool.Name or "none"
+    toolLabel.TextColor3 = Config.Text.Tool.Color
 else
     toolLabel.Visible = false
 end
@@ -452,9 +453,11 @@ if Config.Text.Studs.Enable then
     local distance = (Camera.CFrame.Position - rootPart.Position).Magnitude
     local meters = distance * 0.28
     studsLabel.Text = string.format("[%.0fm]", meters)
+    studsLabel.TextColor3 = Config.Text.Studs.Color
 else
     studsLabel.Visible = false
 end
+
 
     if Config.Bars.Armor.Enable and character then
         local bodyEffects = character:FindFirstChild("BodyEffects")
