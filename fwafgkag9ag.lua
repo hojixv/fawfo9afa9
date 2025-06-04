@@ -1,4 +1,4 @@
-print '*'
+print 'wave is dogshit'
 getgenv().Config = {
     Box = {
         Enable = false,
@@ -432,6 +432,7 @@ if Config.Text.Enable then
     nameLabel.Visible = true
     nameLabel.Position = UDim2.new(0, baseX - (nameLabel.AbsoluteSize.X / 2), 0, baseY - textOffset + 6)
     nameLabel.Text = player.Name
+	nameLabel.Color = Config.Text.Name.Color
 
     toolLabel.Visible = true
     toolLabel.Position = UDim2.new(0, baseX - (toolLabel.AbsoluteSize.X / 2), 0, baseY + size.Y + 15)
