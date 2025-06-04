@@ -177,8 +177,12 @@ utility.funcs.make_text = function(p)
     d.TextSize = 10
     d.TextStrokeColor3 = Color3.fromRGB(0,0,0)
     d.FontFace = Fonts[Config.Box.Font]
+    d.Text = "" 
+    d.Visible = false 
+    d.Position = UDim2.new(0, -1000, 0, -1000) 
     return d
 end
+
 
 utility.funcs.render = LPH_NO_VIRTUALIZE(function(player)
     if not player then return end
