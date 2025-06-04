@@ -1,4 +1,4 @@
-print 'bladeeee'
+print 'reality surf'
 getgenv().Config = {
     Box = {
         Enable = false,
@@ -420,30 +420,40 @@ end
         end
     end
 
-if Config.Text.Enable then
-    local nameLabel = playerCache.Text.Name
-    local toolLabel = playerCache.Text.Tool
-    local studsLabel = playerCache.Text.Studs
+local nameLabel = playerCache.Text.Name
+local toolLabel = playerCache.Text.Tool
+local studsLabel = playerCache.Text.Studs
 
-    local textOffset = 15
-    local baseX = position.X + (size.X / 2)
-    local baseY = position.Y - gui_inset.Y
+local textOffset = 15
+local baseX = position.X + (size.X / 2)
+local baseY = position.Y - gui_inset.Y
 
+if Config.Text.Name.Enable then
     nameLabel.Visible = true
     nameLabel.Position = UDim2.new(0, baseX - (nameLabel.AbsoluteSize.X / 2), 0, baseY - textOffset + 6)
     nameLabel.Text = player.Name
-	nameLabel.TextColor3 = Config.Text.Name.Color
+    nameLabel.TextColor3 = Config.Text.Name.Color
+else
+    nameLabel.Visible = false
+end
 
+if Config.Text.Tool.Enable then
     toolLabel.Visible = true
     toolLabel.Position = UDim2.new(0, baseX - (toolLabel.AbsoluteSize.X / 2), 0, baseY + size.Y + 15)
     local tool = character:FindFirstChildOfClass("Tool")
     toolLabel.Text = tool and tool.Name or "none"
+else
+    toolLabel.Visible = false
+end
 
+if Config.Text.Studs.Enable then
     studsLabel.Visible = true
     studsLabel.Position = UDim2.new(0, baseX - (studsLabel.AbsoluteSize.X / 2), 0, baseY + size.Y + 5)
     local distance = (Camera.CFrame.Position - rootPart.Position).Magnitude
     local meters = distance * 0.28
     studsLabel.Text = string.format("[%.0fm]", meters)
+else
+    studsLabel.Visible = false
 end
 
     if Config.Bars.Armor.Enable and character then
