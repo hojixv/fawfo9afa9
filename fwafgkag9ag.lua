@@ -436,32 +436,33 @@ end
         end
     end
 
-    if Config.Text.Enable then
-        local nameLabel = playerCache.Text.Name
-        local toolLabel = playerCache.Text.Tool
-        local studsLabel = playerCache.Text.Studs
-    
-        local textOffset = 15
-        local baseX = position.X + (size.X / 2)
-        local baseY = position.Y - gui_inset.Y
-    
-        nameLabel.Visible = true
-        nameLabel.Position = UDim2.new(0, baseX - (nameLabel.AbsoluteSize.X / 2), 0, baseY - textOffset + 6)
-        nameLabel.Text = player.Name
-    
-        toolLabel.Visible = true
-        toolLabel.Position = UDim2.new(0, baseX - (toolLabel.AbsoluteSize.X / 2), 0, baseY + size.Y + 15)
-        local tool = character:FindFirstChildOfClass("Tool")
-        toolLabel.Text = tool and tool.Name or "none"
-    
-        studsLabel.Visible = true
-        studsLabel.Position = UDim2.new(0, baseX - (studsLabel.AbsoluteSize.X / 2), 0, baseY + size.Y + 5)
-        local distance = (Camera.CFrame.Position - rootPart.Position).Magnitude
-        local meters = distance * 0.28
-        studsLabel.Text = string.format("[%.0fm]", meters)
+if Config.Text.Enable then
+    local nameLabel = playerCache.Text.Name
+    local toolLabel = playerCache.Text.Tool
+    local studsLabel = playerCache.Text.Studs
 
-    end
-    
+    local textOffset = 15
+    local baseX = position.X + (size.X / 2)
+    local baseY = position.Y - gui_inset.Y
+
+    nameLabel.Visible = true
+    nameLabel.Position = UDim2.new(0, baseX - (nameLabel.AbsoluteSize.X / 2), 0, baseY - textOffset + 6)
+    nameLabel.Text = player.Name
+    nameLabel.TextColor3 = Config.Text.Name.Color or Color3.new(1, 1, 1)
+
+    toolLabel.Visible = true
+    toolLabel.Position = UDim2.new(0, baseX - (toolLabel.AbsoluteSize.X / 2), 0, baseY + size.Y + 15)
+    local tool = character:FindFirstChildOfClass("Tool")
+    toolLabel.Text = tool and tool.Name or "none"
+    toolLabel.TextColor3 = Config.Text.Tool.Color or Color3.new(1, 1, 1)
+
+    studsLabel.Visible = true
+    studsLabel.Position = UDim2.new(0, baseX - (studsLabel.AbsoluteSize.X / 2), 0, baseY + size.Y + 5)
+    local distance = (Camera.CFrame.Position - rootPart.Position).Magnitude
+    local meters = distance * 0.28
+    studsLabel.Text = string.format("[%.0fm]", meters)
+    studsLabel.TextColor3 = Config.Text.Studs.Color or Color3.new(1, 1, 1)
+end
 
     if Config.Bars.Armor.Enable and character then
         local bodyEffects = character:FindFirstChild("BodyEffects")
