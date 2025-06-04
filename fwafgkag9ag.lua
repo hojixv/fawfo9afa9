@@ -1,3 +1,4 @@
+print '*'
 getgenv().Config = {
     Box = {
         Enable = false,
